@@ -591,9 +591,10 @@ var test_procedure = {
 
   /* start the experiment */
       jsPsych.init({
-        preload_images : preloadimages,
+        preload_images: preloadimages,
+        max_load_time: 1000 * 500,
         timeline: timeline,
-        show_progress_bar : true,
+        show_progress_bar: true,
         on_finish: function(){
           jsPsych.data.displayData();
         }

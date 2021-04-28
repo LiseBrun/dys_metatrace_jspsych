@@ -326,7 +326,7 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
     	var imageObj = new Image();
     	imageObj.onload = function() {
     		ctx.drawImage(imageObj, 0, 0, mywidth, myheight);
-    		ctx.globalAlpha=0.4;
+    		ctx.globalAlpha=0.9;
     		//Beginning of trial
     		ctx.beginPath();
     		//Creation du rond vert de départ
@@ -334,7 +334,7 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
     		ctx.fillStyle = 'green';
     		ctx.fill();
     		//transparence du rond vert
-    	  ctx.globalAlpha=0.4;
+    	  ctx.globalAlpha=0.9;
     	  document.getElementById("status").innerHTML = trial.start_instructions + "<p class = 'custom-font'>&nbsp;</p><p class = 'custom-44px'>&nbsp;</p>";
     	};
 
@@ -462,7 +462,7 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
 
     				ctx.arc(xstart, ystart, startRadius, 0, 2 * Math.PI, false);
     				ctx.fillStyle = 'green';
-    				ctx.globalAlpha=0.5;
+    				ctx.globalAlpha=0.9;
     				ctx.fill();
     				ctx.beginPath();
     				ctx.arc(mouse.x, mouse.y, 4, 0, 2 * Math.PI, false);
@@ -502,7 +502,7 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
     					    ctx.clearRect(0, 0, canvas.width, canvas.height);
     							ctx.drawImage(imageObj, 0, 0, mywidth, myheight);
     							ctx.fillStyle = 'red';
-    							ctx.globalAlpha=0.4;
+    							ctx.globalAlpha=0.6;
     							ctx.beginPath();
     							ctx.arc(xend, yend, endRadius, 0, 2 * Math.PI, false);
     							ctx.fill();

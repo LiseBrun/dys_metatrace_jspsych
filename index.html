@@ -27,12 +27,12 @@
       <link rel="stylesheet" href="css/custom.css"></link>
 
       <!-- Pavlovia -->
-      <script type="text/javascript" src="lib/vendors/jspsych-6.0.0/jspsych.js"></script>
+      <!-- <script type="text/javascript" src="lib/vendors/jspsych-6.0.0/jspsych.js"></script>
     	<link href="lib/vendors/jspsych-6.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" src="lib/vendors/jspsych-6.0.0/plugins/jspsych-html-keyboard-response.js"></script>
     	<script type="text/javascript" src="lib/vendors/jspsych-6.0.0/plugins/jspsych-image-keyboard-response.js"></script>
     	<script type="text/javascript" src="lib/vendors/jquery-2.2.0.min.js"></script>
-    	<script type="text/javascript" src="lib/jspsych-pavlovia-2020.2.js"></script>
+    	<script type="text/javascript" src="lib/jspsych-pavlovia-2020.2.js"></script> -->
 
 
 
@@ -42,10 +42,14 @@
   <script>
 
 /* init connection with pavlovia.org */
-  var pavlovia_init = {
-    type: "pavlovia",
-    command: "init"
-  };
+
+//   var pav = false;
+//   if(pav) {
+//     var pavlovia_init = {
+//       type: "pavlovia",
+//       command: "init"
+//     }
+// };
 
 
 /* preload images */
@@ -562,7 +566,7 @@ var training_score_feedback_procedure = {
           // without replacement: once a figure is picked, it cannot be picked again
           type: 'without-replacement',
           // number of trials of the procedure
-          size: 3,
+          size: 2,
   }
 };
 
@@ -643,21 +647,22 @@ var test_procedure = {
       `};
 
 
-/* finish connection with pavlovia.org */
-    var pavlovia_finish = '{'
-      type: "pavlovia",
-      command: "finish"
-      '}';
+// /* finish connection with pavlovia.org */
+//     var pavlovia_finish = '{'
+//       type: "pavlovia",
+//       command: "finish"
+//       '}';
 
 /* create timeline */
     var timeline = [];
-    timeline.push(pavlovia_init,
+    timeline.push(
+      //pavlovia_init,
                   preload,
-                  fullscreen,
-                  level1,
-                  instructions_1,
-                  instructions_2,
-                  instructions_3,
+                  // fullscreen,
+                  // level1,
+                  // instructions_1,
+                  // instructions_2,
+                  // instructions_3,
                   training_all_feedback_procedure,
                   level2,
                   instructions_score_feedback,
@@ -672,7 +677,8 @@ var test_procedure = {
                   comments,
                   fullscreen_exit,
                   ending,
-                  pavlovia_finish);
+                  //pavlovia_finish
+                );
 
 
 

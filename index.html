@@ -32,6 +32,12 @@
   <script>
 
 /* Preload images */
+
+  var preload = {
+      type: 'preload',
+      auto_preload: true
+  }
+
   var preloadimages = ['img/milo_hello.gif',
                        'img/milo_showing_right.png',
                        'img/instructions1.png',
@@ -567,7 +573,8 @@ var test_procedure = {
 
 /* create timeline */
     var timeline = [];
-    timeline.push(welcome,
+    timeline.push(preload,
+                  welcome,
                   fullscreen,
                   level1,
                   instructions_1,

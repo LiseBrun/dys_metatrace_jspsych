@@ -33,30 +33,31 @@
 
 /* Preload images */
 
-  var preload = {
-      type: 'preload',
-      auto_preload: true
-  }
+    var preloadimages = ['img/milo_hello.gif',
+                         'img/milo_showing_right.png',
+                         'img/instructions1.png',
+                         'img/instructions1bis.png',
+                         'img/instructions2bis.png',
+                         'img/instructions3.png',
+                         'img/instructions4.png',
+                         'img/instructions5.png',
+                         'img/milo_showing_points.png',
+                         'img/level1.png',
+                         'img/level2.png',
+                         'img/level3.png',
+                         'img/conf_scale_0.png',
+                         'img/conf_scale_1.png',
+                         'img/conf_scale_2.png',
+                         'img/conf_scale_3.png',
+                         'img/conf_scale_4.png',
+                         'img/win.png',
+                         ];
 
-  var preloadimages = ['img/milo_hello.gif',
-                       'img/milo_showing_right.png',
-                       'img/instructions1.png',
-                       'img/instructions1bis.png',
-                       'img/instructions2bis.png',
-                       'img/instructions3.png',
-                       'img/instructions4.png',
-                       'img/instructions5.png',
-                       'img/milo_showing_points.png',
-                       'img/level1.png',
-                       'img/level2.png',
-                       'img/level3.png',
-                       'img/conf_scale_0.png',
-                       'img/conf_scale_1.png',
-                       'img/conf_scale_2.png',
-                       'img/conf_scale_3.png',
-                       'img/conf_scale_4.png',
-                       'img/win.png',
-                       ];
+     var preload = {
+         type: 'preload',
+         images: preloadimages,
+         max_load_time: 60000 // 1 minute
+     }
 
 
 /* welcome message */
@@ -572,52 +573,30 @@ var test_procedure = {
 
 
 /* create timeline */
-    // var timeline = [];
-    // timeline.push(preload,
-    //               welcome,
-    //               fullscreen,
-    //               level1,
-    //               instructions_1,
-    //               instructions_2,
-    //               instructions_3,
-    //               training_all_feedback_procedure,
-    //               level2,
-    //               instructions_score_feedback,
-    //               training_score_feedback_procedure,
-    //               level3,
-    //               instructions_test,
-    //               test_procedure,
-    //               end_task,
-    //               age,
-    //               sex,
-    //               difficulty,
-    //               comments,
-    //               fullscreen_exit,
-    //               ending);
+    var timeline = [];
+    timeline.push(preload,
+                  welcome,
+                  fullscreen,
+                  level1,
+                  instructions_1,
+                  instructions_2,
+                  instructions_3,
+                  training_all_feedback_procedure,
+                  level2,
+                  instructions_score_feedback,
+                  training_score_feedback_procedure,
+                  level3,
+                  instructions_test,
+                  test_procedure,
+                  end_task,
+                  age,
+                  sex,
+                  difficulty,
+                  comments,
+                  fullscreen_exit,
+                  ending);
 
-    var timeline = [
-      preload,
-      welcome,
-      fullscreen,
-      level1,
-      instructions_1,
-      instructions_2,
-      instructions_3,
-      training_all_feedback_procedure,
-      level2,
-      instructions_score_feedback,
-      training_score_feedback_procedure,
-      level3,
-      instructions_test,
-      test_procedure,
-      end_task,
-      age,
-      sex,
-      difficulty,
-      comments,
-      fullscreen_exit,
-      ending
-                ];
+
 
   /* start the experiment */
       jsPsych.init({

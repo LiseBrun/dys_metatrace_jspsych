@@ -448,7 +448,7 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
     			ctx.stroke();
     			//remove score display during task :
           if(score_feedback == true) {
-      			document.getElementById("status").innerHTML = trial.draw_instructions + `<p class = "custom-font">Score = ` + Math.round(score) + `</p><p class = 'custom-44px'>&nbsp;</p>`;
+      			document.getElementById("status").innerHTML = trial.draw_instructions + `<p class = "custom-font">Score = ` + Math.round(score) + ` points.</p><p class = 'custom-44px'>&nbsp;</p>`;
           } else {
             document.getElementById("status").innerHTML = trial.draw_instructions + "<p class = 'custom-font'>&nbsp;</p><p class = 'custom-44px'>&nbsp;</p>";;
           }
@@ -462,7 +462,7 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
 
     				ctx.arc(xstart, ystart, startRadius, 0, 2 * Math.PI, false);
     				ctx.fillStyle = 'green';
-    				ctx.globalAlpha=0.4;
+    				ctx.globalAlpha=0.5;
     				ctx.fill();
     				ctx.beginPath();
     				ctx.arc(mouse.x, mouse.y, 4, 0, 2 * Math.PI, false);
@@ -478,7 +478,7 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
 
     				//display "you have finished the task"
             if(final_score_feedback == true) {
-      				document.getElementById("status").innerHTML = trial.end_instructions + `<p class = "custom-font">Voici ton score : ` + Math.round(score) + `</p><p class = "continue-instructions">Clique sur la flèche pour continuer</p>`;
+      				document.getElementById("status").innerHTML = trial.end_instructions + `<p class = "custom-font">Voici ton score : ` + Math.round(score) + ` points.</p><p class = "continue-instructions">Clique sur la flèche pour continuer</p>`;
             } else {
               document.getElementById("status").innerHTML = trial.end_instructions + `<p class = "custom-font">&nbsp;</p><p class = "continue-instructions">Clique sur la flèche pour continuer</p>`;
             }

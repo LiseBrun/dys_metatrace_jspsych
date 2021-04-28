@@ -14,7 +14,7 @@ coord_radar <- function (theta = "x", start = 0, direction = 1) {
           is_linear = function(coord) TRUE)
 }
 
-size <- 2
+size <- 10
 x1 <- 0
 x2 <- 10
 y1 <- 0
@@ -30,13 +30,13 @@ ggplot() +
 
 # Looping the procedure for various sizes and x2 coordinate
 
-#thickness of line (10 level of difficulty)
-size_seq <- seq(1, 5, by = 0.5)
+#thickness of line (18 level of difficulty)
+size_seq <- seq(0.5, 9.5, by = 0.5)
 #coordinates of start point: always in center
 x1 <- 0
 y1 <- 0
 #coordinates of end point: keep the same lenght but with different orientations
-x2_seq <- seq(0, 360, by = 10)
+x2_seq <- seq(0, 360, by = 5)
 y2 <- 100
 
 for (size in size_seq) {

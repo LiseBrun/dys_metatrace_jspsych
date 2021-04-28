@@ -572,29 +572,52 @@ var test_procedure = {
 
 
 /* create timeline */
-    var timeline = [];
-    timeline.push(preload,
-                  welcome,
-                  fullscreen,
-                  level1,
-                  instructions_1,
-                  instructions_2,
-                  instructions_3,
-                  training_all_feedback_procedure,
-                  level2,
-                  instructions_score_feedback,
-                  training_score_feedback_procedure,
-                  level3,
-                  instructions_test,
-                  test_procedure,
-                  end_task,
-                  age,
-                  sex,
-                  difficulty,
-                  comments,
-                  fullscreen_exit,
-                  ending);
+    // var timeline = [];
+    // timeline.push(preload,
+    //               welcome,
+    //               fullscreen,
+    //               level1,
+    //               instructions_1,
+    //               instructions_2,
+    //               instructions_3,
+    //               training_all_feedback_procedure,
+    //               level2,
+    //               instructions_score_feedback,
+    //               training_score_feedback_procedure,
+    //               level3,
+    //               instructions_test,
+    //               test_procedure,
+    //               end_task,
+    //               age,
+    //               sex,
+    //               difficulty,
+    //               comments,
+    //               fullscreen_exit,
+    //               ending);
 
+    var timeline = [
+      preload,
+      welcome,
+      fullscreen,
+      level1,
+      instructions_1,
+      instructions_2,
+      instructions_3,
+      training_all_feedback_procedure,
+      level2,
+      instructions_score_feedback,
+      training_score_feedback_procedure,
+      level3,
+      instructions_test,
+      test_procedure,
+      end_task,
+      age,
+      sex,
+      difficulty,
+      comments,
+      fullscreen_exit,
+      ending
+                ];
 
   /* start the experiment */
       jsPsych.init({

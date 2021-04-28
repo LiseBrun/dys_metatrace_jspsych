@@ -26,12 +26,29 @@
       <script src="task/color_trace.js" type="text/javascript"></script>
       <link rel="stylesheet" href="css/custom.css"></link>
 
+      <!-- Pavlovia -->
+      <script type="text/javascript" src="lib/vendors/jspsych-6.0.0/jspsych.js"></script>
+    	<link href="lib/vendors/jspsych-6.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" src="lib/vendors/jspsych-6.0.0/plugins/jspsych-html-keyboard-response.js"></script>
+    	<script type="text/javascript" src="lib/vendors/jspsych-6.0.0/plugins/jspsych-image-keyboard-response.js"></script>
+    	<script type="text/javascript" src="lib/vendors/jquery-2.2.0.min.js"></script>
+    	<script type="text/javascript" src="lib/jspsych-pavlovia-2020.2.js"></script>
+
+
+
   </head>
   <body></body>
 
   <script>
 
-/* Preload images */
+/* init connection with pavlovia.org */
+  var pavlovia_init = {
+    type: "pavlovia",
+    command: "init"
+  };
+
+
+/* preload images */
 
     var preloadimages = ['img/milo_hello.gif',
                          'img/milo_showing_right.png',
@@ -203,7 +220,7 @@
             };
 
 
-/* Line tracing task */
+/* line tracing task */
 
 // defining the timeline variables
 var stimuli = [
@@ -246,8 +263,6 @@ var stimuli = [
 ];
 
 
-// -------- psychophysical scale ---------
-
 // Defining variables for the psychophysical scale
 var n_consecutive_success = 0;
 var n_consecutive_failure = 0;
@@ -276,6 +291,7 @@ var training_all_feedback = {
     training_all_feedback.figure_name = figure_orientation + "_" + figure_difficulty;
   },
   data: {},
+  //staircase
   on_finish: function(data){
     data_score = data.score;
     if (data_score > 5) {
@@ -301,7 +317,6 @@ var training_all_feedback = {
         figure_difficulty = figure_difficulty;
         n_consecutive_success = 0;
       }
-
     } else if (n_consecutive_failure == 1) {
       if (figure_difficulty < 9.5) {
         figure_difficulty = figure_difficulty + 0.5;
@@ -341,6 +356,7 @@ var training_score_feedback = {
     training_score_feedback.figure_name = figure_orientation + "_" + figure_difficulty;
   },
   data: {},
+  //staircase
   on_finish: function(data){
     data_score = data.score;
     if (data_score > 5) {
@@ -366,7 +382,6 @@ var training_score_feedback = {
         figure_difficulty = figure_difficulty;
         n_consecutive_success = 0;
       }
-
     } else if (n_consecutive_failure == 1) {
       if (figure_difficulty < 9.5) {
         figure_difficulty = figure_difficulty + 0.5;
@@ -405,6 +420,7 @@ var test_phase = {
     test_phase.figure_name = figure_orientation + "_" + figure_difficulty;
   },
   data: {},
+  //staircase
   on_finish: function(data){
     data_score = data.score;
     if (data_score > 5) {
@@ -430,7 +446,6 @@ var test_phase = {
         figure_difficulty = figure_difficulty;
         n_consecutive_success = 0;
       }
-
     } else if (n_consecutive_failure == 1) {
       if (figure_difficulty < 9.5) {
         figure_difficulty = figure_difficulty + 0.5;
@@ -446,7 +461,7 @@ var test_phase = {
 };
 
 
-/* Feedback */
+/* feedback for training phase */
 
 var feedback = {
   type: "html-button-response",
@@ -458,9 +473,7 @@ var feedback = {
 }
 
 
-/* Prediction of score : 2nd order task */
-
-//There are 2 choices: with a slider or a likert
+/* prediction of score : 2nd order task (2 possibilies : slider or likert) */
 
 //Choice 1 : Slider
 // var prediction = {
@@ -489,6 +502,7 @@ var feedback = {
 
 
 //Choice 2 : Likert
+
   //scale
     var scale = [
       "<p class = 'custom-font'>0 <br><br> <img src = 'img/conf_scale_0.png', height = 50px, width = 50px><br></p>",
@@ -504,7 +518,7 @@ var feedback = {
                "<p class = 'custom-font'>10 <br><br> <img src = 'img/conf_scale_4.png', height = 50px, width = 50px><br></p>"
     ];
 
-    //confidence scale
+    //prediction
     var prediction = {
       type: 'survey-likert',
       questions: [
@@ -570,7 +584,7 @@ var test_procedure = {
 
 
 
-/*End of the line tracing task*/
+/* End of the line tracing task */
 
     var end_task = {
       type: "html-button-response",
@@ -584,7 +598,7 @@ var test_procedure = {
     };
 
 
-/* Demographic questions*/
+/* Demographic questions */
 
     var age = {
        type: 'survey-text',
@@ -611,14 +625,14 @@ var test_procedure = {
       };
 
 
-/*End of full screen*/
+/* End of full screen */
 
         var fullscreen_exit = {
             type: 'fullscreen',
             fullscreen_mode: false
           };
 
-/*End of study*/
+/* End of study */
 
     var ending = {
         type: "html-keyboard-response",
@@ -629,20 +643,26 @@ var test_procedure = {
       `};
 
 
+/* finish connection with pavlovia.org */
+    var pavlovia_finish = '{'
+      type: "pavlovia",
+      command: "finish"
+      '}';
+
 /* create timeline */
     var timeline = [];
-    timeline.push(preload,
-                  // welcome,
+    timeline.push(pavlovia_init,
+                  preload,
                   fullscreen,
-                  // level1,
-                  // instructions_1,
-                  // instructions_2,
-                  // instructions_3,
+                  level1,
+                  instructions_1,
+                  instructions_2,
+                  instructions_3,
                   training_all_feedback_procedure,
                   level2,
-                  // instructions_score_feedback,
+                  instructions_score_feedback,
                   training_score_feedback_procedure,
-                  // level3,
+                  level3,
                   instructions_test,
                   test_procedure,
                   end_task,
@@ -651,7 +671,8 @@ var test_procedure = {
                   difficulty,
                   comments,
                   fullscreen_exit,
-                  ending);
+                  ending,
+                  pavlovia_finish);
 
 
 

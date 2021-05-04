@@ -158,10 +158,10 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
 
     var html = '<div id="jspsych-html-button-response-stimulus">'+trial.stimulus+'</div>';
 
-    html += '<div id="sketch"><canvas id="paint" width="500" height="500" style="border:1px solid #000000;"></canvas> </div>' +
+    html += '<div id="sketch"><canvas id="paint" width="800" height="500" style="border:1px solid #000000;"></canvas> </div>' +
                 '<div id="status"></div>';
 
-    // helper to show buttons
+    // helper to show buttons : hide
     function hide_continue_button() {
       var x = document.getElementById("jspsych-html-button-response-btngroup");
       // if (x.style.display === "none") {
@@ -171,7 +171,7 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
       // }
     }
 
-    // helper to show buttons
+    // helper to show buttons: show
     function show_continue_button() {
       var x = document.getElementById("jspsych-html-button-response-btngroup");
       // if (x.style.display === "none") {
@@ -284,6 +284,14 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
       var score_feedback = trial.score_feedback;
       var final_score_feedback = trial.final_score_feedback;
 
+      // click on "enter" when they want to finish the trial
+     //  canvas.addEventListener("click", function(event) {
+     //    if (drawing) {
+     //     drawing = false;
+     //     finished = true;
+     //     show_continue_button();
+     //   }
+     // });
 
 
     function line_tracing() {
@@ -370,19 +378,25 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
     		var p = ctx.getImageData(mouse.x, mouse.y, 1, 1).data;
         var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
 
-    		//finir l'essai ?
-    		var cendRadius = Math.sqrt(Math.pow(mouse.x - xend, 2) + Math.pow(mouse.y-yend, 2));
-    		if(cendRadius < 40 + endRadius) {
-    			canvas.style.cursor = 'auto';
-    		}
-    		 if (cendRadius < endRadius) {
-    		  if (drawing) {
-    			drawing = false;
-    			finished = true;
-          // hide/show buttons
-          show_continue_button();
-    			}
-    		}
+
+    		//FINIR L'ESSAI (ancienne version)
+
+    		// var cendRadius = Math.sqrt(Math.pow(mouse.x - xend, 2) + Math.pow(mouse.y-yend, 2));
+
+        // // faire apparaître le curseur quand on est proches du rond rouge d'arrivee
+    		// // if(cendRadius < 40 + endRadius) {
+    		// // 	canvas.style.cursor = 'auto';
+    		// // }
+
+        // // quand on rentre dans le rond rouge d'arrivée, l'essai se fini
+    		//  if (cendRadius < endRadius) {
+    		//   if (drawing) {
+    		// 	drawing = false;
+    		// 	finished = true;
+        //   // hide/show buttons
+        //   show_continue_button();
+    		// 	}
+    		// }
 
 
     		 //do drawing if in drawing mode
@@ -491,9 +505,23 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
 
     	}, false);
 
+      // click on "enter" when they want to finish the trial
+      canvas.addEventListener("click", function(event) {
+        if (drawing) {
+         drawing = false;
+         finished = true;
+         show_continue_button();
+         //display "you have finished the task"
+          if(final_score_feedback == true) {
+           document.getElementById("status").innerHTML = trial.end_instructions + `<p class = "custom-font">Voici ton score : ` + Math.round(score) + ` points.</p><p class = "continue-instructions">Clique sur la flèche pour continuer</p>`;
+          } else {
+            document.getElementById("status").innerHTML = trial.end_instructions + `<p class = "custom-font">&nbsp;</p><p class = "continue-instructions">Clique sur la flèche pour continuer</p>`;
+          }
+       }
+     });
 
 
-    	canvas.addEventListener('mousedown', function(e) {
+    	canvas.addEventListener('click', function(e) {
     		var currentRadius = Math.sqrt(Math.pow(mouse.x - xstart, 2) + Math.pow(mouse.y-ystart, 2));
     		if(!finished) {
     			if (drawing) {

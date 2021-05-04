@@ -131,11 +131,12 @@
           type: "html-button-response",
           choices: ["&#10095;"],
           stimulus: `
-          <p class = "custom-font">Pour commencer le jeu, tu vas devoir cliquer sur le rond vert : c'est le point de départ.</p>
+          <p class = "custom-font">Pour commencer le jeu, tu vas devoir cliquer une fois sur le rond vert : c'est le point de départ.</p>
           <img src = "img/instructions1bis.png", height="180", width="230">
           <p class = "custom-font">Un rond rouge va alors apparaître : c'est le point d'arrivée. </p>
           <img src = "img/instructions2bis.png", height="180", width="300">
           <p class = "custom-font">Le but est d'arriver sur le rond rouge en restant le plus possible sur les lignes du dessin.</p>
+          <p class = "custom-font">Cliques une fois sur le point rouge pour finir le dessin.</p>
           <p class = "continue-instructions">Appuie sur la flèche pour continuer.</p>
           `,
             };
@@ -148,6 +149,7 @@
           <p class = "custom-font">Lorsque tu restes sur les lignes du dessin, ton tracé est vert, et tu gagnes des points.</p>
           <p class = "custom-font">Lorsque tu sors des lignes du dessin, ton tracé est rouge, et tu perds des points.</p>
           <p class = "custom-font">Le but est de gagner le plus de points possible : le maximum est 10.</p>
+          <p class = "custom-font">Dans ce jeu, tu n'es pas chronométré : ce qui est important, c'est que tu redessines le dessin le mieux possible.</p>
           <img src = "img/instructions3.png", height="200", width="250">
           <img src = "img/milo_showing_points.png", height="150", width="150">
           <p class = "continue-instructions">Appuie sur la flèche pour commencer le jeu.</p>
@@ -228,42 +230,44 @@
 
 // defining the timeline variables
 var stimuli = [
-  {figure_orientation: "0",   x_start: 250, y_start: 250, x_end: 250, y_end: 50},
-  {figure_orientation: "10",  x_start: 250, y_start: 250, x_end: 283, y_end: 53},
-  {figure_orientation: "20",  x_start: 250, y_start: 250, x_end: 318, y_end: 63},
-  {figure_orientation: "30",  x_start: 250, y_start: 250, x_end: 349, y_end: 76},
-  {figure_orientation: "40",  x_start: 250, y_start: 250, x_end: 377, y_end: 97},
-  {figure_orientation: "50",  x_start: 250, y_start: 250, x_end: 403, y_end: 121},
-  {figure_orientation: "60",  x_start: 250, y_start: 250, x_end: 423, y_end: 149},
-  {figure_orientation: "70",  x_start: 250, y_start: 250, x_end: 436, y_end: 181},
-  {figure_orientation: "80",  x_start: 250, y_start: 250, x_end: 445, y_end: 215},
-  {figure_orientation: "90",  x_start: 250, y_start: 250, x_end: 450, y_end: 250},
-  {figure_orientation: "100", x_start: 250, y_start: 250, x_end: 445, y_end: 283},
-  {figure_orientation: "110", x_start: 250, y_start: 250, x_end: 436, y_end: 318},
-  {figure_orientation: "120", x_start: 250, y_start: 250, x_end: 423, y_end: 348},
-  {figure_orientation: "130", x_start: 250, y_start: 250, x_end: 403, y_end: 377},
-  {figure_orientation: "140", x_start: 250, y_start: 250, x_end: 377, y_end: 402},
-  {figure_orientation: "150", x_start: 250, y_start: 250, x_end: 349, y_end: 422},
-  {figure_orientation: "160", x_start: 250, y_start: 250, x_end: 318, y_end: 437},
-  {figure_orientation: "170", x_start: 250, y_start: 250, x_end: 283, y_end: 447},
-  {figure_orientation: "180", x_start: 250, y_start: 250, x_end: 250, y_end: 450},
-  {figure_orientation: "190", x_start: 250, y_start: 250, x_end: 215, y_end: 447},
-  {figure_orientation: "200", x_start: 250, y_start: 250, x_end: 180, y_end: 437},
-  {figure_orientation: "210", x_start: 250, y_start: 250, x_end: 148, y_end: 422},
-  {figure_orientation: "220", x_start: 250, y_start: 250, x_end: 120, y_end: 402},
-  {figure_orientation: "230", x_start: 250, y_start: 250, x_end: 95,  y_end: 377},
-  {figure_orientation: "240", x_start: 250, y_start: 250, x_end: 76,  y_end: 348},
-  {figure_orientation: "250", x_start: 250, y_start: 250, x_end: 62,  y_end: 318},
-  {figure_orientation: "260", x_start: 250, y_start: 250, x_end: 54,  y_end: 283},
-  {figure_orientation: "270", x_start: 250, y_start: 250, x_end: 50,  y_end: 250},
-  {figure_orientation: "280", x_start: 250, y_start: 250, x_end: 54,  y_end: 215},
-  {figure_orientation: "290", x_start: 250, y_start: 250, x_end: 63,  y_end: 181},
-  {figure_orientation: "300", x_start: 250, y_start: 250, x_end: 76,  y_end: 149},
-  {figure_orientation: "310", x_start: 250, y_start: 250, x_end: 95,  y_end: 121},
-  {figure_orientation: "320", x_start: 250, y_start: 250, x_end: 120, y_end: 97},
-  {figure_orientation: "330", x_start: 250, y_start: 250, x_end: 149, y_end: 76},
-  {figure_orientation: "340", x_start: 250, y_start: 250, x_end: 181, y_end: 63},
-  {figure_orientation: "350", x_start: 250, y_start: 250, x_end: 214, y_end: 53},
+  // {figure_orientation: "0",   x_start: 250, y_start: 250, x_end: 250, y_end: 50},
+  // {figure_orientation: "10",  x_start: 250, y_start: 250, x_end: 283, y_end: 53},
+  // {figure_orientation: "20",  x_start: 250, y_start: 250, x_end: 318, y_end: 63},
+  {figure_orientation: "25",  x_start: 252, y_start: 243, x_end: 334, y_end: 68},
+  // {figure_orientation: "30",  x_start: 250, y_start: 250, x_end: 349, y_end: 76},
+  // {figure_orientation: "40",  x_start: 250, y_start: 250, x_end: 377, y_end: 97},
+  {figure_orientation: "50",  x_start: 255, y_start: 244, x_end: 402, y_end: 121},
+  // {figure_orientation: "60",  x_start: 250, y_start: 250, x_end: 423, y_end: 149},
+  // {figure_orientation: "70",  x_start: 250, y_start: 250, x_end: 436, y_end: 181},
+  {figure_orientation: "75",  x_start: 257, y_start: 246, x_end: 442, y_end: 198},
+  // {figure_orientation: "80",  x_start: 250, y_start: 250, x_end: 445, y_end: 215},
+  // {figure_orientation: "90",  x_start: 250, y_start: 250, x_end: 450, y_end: 250},
+  // {figure_orientation: "100", x_start: 250, y_start: 250, x_end: 445, y_end: 283},
+  // {figure_orientation: "110", x_start: 250, y_start: 250, x_end: 436, y_end: 318},
+  // {figure_orientation: "120", x_start: 250, y_start: 250, x_end: 423, y_end: 348},
+  // {figure_orientation: "130", x_start: 250, y_start: 250, x_end: 403, y_end: 377},
+  // {figure_orientation: "140", x_start: 250, y_start: 250, x_end: 377, y_end: 402},
+  // {figure_orientation: "150", x_start: 250, y_start: 250, x_end: 349, y_end: 422},
+  // {figure_orientation: "160", x_start: 250, y_start: 250, x_end: 318, y_end: 437},
+  // {figure_orientation: "170", x_start: 250, y_start: 250, x_end: 283, y_end: 447},
+  // {figure_orientation: "180", x_start: 250, y_start: 250, x_end: 250, y_end: 450},
+  // {figure_orientation: "190", x_start: 250, y_start: 250, x_end: 215, y_end: 447},
+  // {figure_orientation: "200", x_start: 250, y_start: 250, x_end: 180, y_end: 437},
+  // {figure_orientation: "210", x_start: 250, y_start: 250, x_end: 148, y_end: 422},
+  // {figure_orientation: "220", x_start: 250, y_start: 250, x_end: 120, y_end: 402},
+  // {figure_orientation: "230", x_start: 250, y_start: 250, x_end: 95,  y_end: 377},
+  // {figure_orientation: "240", x_start: 250, y_start: 250, x_end: 76,  y_end: 348},
+  // {figure_orientation: "250", x_start: 250, y_start: 250, x_end: 62,  y_end: 318},
+  // {figure_orientation: "260", x_start: 250, y_start: 250, x_end: 54,  y_end: 283},
+  // {figure_orientation: "270", x_start: 250, y_start: 250, x_end: 50,  y_end: 250},
+  // {figure_orientation: "280", x_start: 250, y_start: 250, x_end: 54,  y_end: 215},
+  // {figure_orientation: "290", x_start: 250, y_start: 250, x_end: 63,  y_end: 181},
+  // {figure_orientation: "300", x_start: 250, y_start: 250, x_end: 76,  y_end: 149},
+  // {figure_orientation: "310", x_start: 250, y_start: 250, x_end: 95,  y_end: 121},
+  // {figure_orientation: "320", x_start: 250, y_start: 250, x_end: 120, y_end: 97},
+  // {figure_orientation: "330", x_start: 250, y_start: 250, x_end: 149, y_end: 76},
+  // {figure_orientation: "340", x_start: 250, y_start: 250, x_end: 181, y_end: 63},
+  // {figure_orientation: "350", x_start: 250, y_start: 250, x_end: 214, y_end: 53},
 ];
 
 
@@ -285,7 +289,7 @@ var training_all_feedback = {
   score_feedback: true,
   final_score_feedback: false,
   start_instructions: `<p class = "custom-font">Clique sur le rond vert pour commencer !</p>`,
-  draw_instructions: `<p class = "custom-font">Rejoins le rond rouge en restant sur les lignes du dessin</p>`,
+  draw_instructions: `<p class = "custom-font">Rejoins puis clique sur le rond rouge en restant sur les lignes du dessin</p>`,
   end_instructions: `<p class = "custom-font">Tu as fini ce dessin. Bravo !</p>`,
   stimulus: '',
   prompt: '',
@@ -350,7 +354,7 @@ var training_score_feedback = {
   final_score_feedback: false,
   cursor_display: true,
   start_instructions: `<p class = "custom-font">Clique sur le rond vert pour commencer !</p>`,
-  draw_instructions: `<p class = "custom-font">Rejoins le rond rouge en restant sur les lignes du dessin</p>`,
+  draw_instructions: `<p class = "custom-font">Rejoins puis clique sur le rond rouge en restant sur les lignes du dessin</p>`,
   end_instructions: `<p class = "custom-font">Tu as fini ce dessin. Bravo ! </p>`,
   stimulus: ``,
   prompt: '',
@@ -414,7 +418,7 @@ var test_phase = {
   final_score_feedback: false,
   cursor_display: false,
   start_instructions: `<p class = "custom-font">Clique sur le rond vert pour commencer !</p>`,
-  draw_instructions: `<p class = "custom-font">Rejoins le rond rouge en restant sur les lignes du dessin</p>`,
+  draw_instructions: `<p class = "custom-font">Rejoins puis clique le rond rouge en restant sur les lignes du dessin</p>`,
   end_instructions: `<p class = "custom-font">Tu as fini ce dessin. Bravo !</p>`,
   stimulus: ``,
   prompt: '',
@@ -527,7 +531,7 @@ var feedback = {
       type: 'survey-likert',
       questions: [
       {prompt: `
-        <p class = "custom-font">A ton avis, combien de points as tu gagné entre 0 et 10 ?</p><p class = "continue-ìnstructions">Cliques sur le chiffre correspondant.</p>
+        <p class = "custom-font">A ton avis, combien de points as tu gagné entre 0 et 10 ?</p><p class = "continue-ìnstructions">Réfléchis bien puis cliques sur le chiffre correspondant.</p>
         `,
         labels: scale,
         required: true}
@@ -548,7 +552,7 @@ var training_all_feedback_procedure = {
   randomize_order: true,
   sample: {
           // without replacement: once a figure is picked, it cannot be picked again
-          type: 'without-replacement',
+          type: 'with-replacement',
           // number of trials of the procedure
           size: 3,
   }
@@ -564,7 +568,7 @@ var training_score_feedback_procedure = {
   randomize_order: true,
   sample: {
           // without replacement: once a figure is picked, it cannot be picked again
-          type: 'without-replacement',
+          type: 'with-replacement',
           // number of trials of the procedure
           size: 2,
   }
@@ -580,7 +584,7 @@ var test_procedure = {
   randomize_order: true,
   sample: {
           // without replacement: once a figure is picked, it cannot be picked again
-          type: 'without-replacement',
+          type: 'with-replacement',
           // number of trials of the procedure
           size: 20,
   }
@@ -657,17 +661,17 @@ var test_procedure = {
     var timeline = [];
     timeline.push(
                   //pavlovia_init,
-                  preload,
-                  fullscreen,
-                  level1,
-                  instructions_1,
-                  instructions_2,
-                  instructions_3,
-                  training_all_feedback_procedure,
-                  level2,
-                  instructions_score_feedback,
-                  training_score_feedback_procedure,
-                  level3,
+                  // preload,
+                  // fullscreen,
+                  // level1,
+                  // instructions_1,
+                  // instructions_2,
+                  // instructions_3,
+                  // training_all_feedback_procedure,
+                  // level2,
+                  // instructions_score_feedback,
+                  // training_score_feedback_procedure,
+                  // level3,
                   instructions_test,
                   test_procedure,
                   end_task,

@@ -93,7 +93,7 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
       },
       final_score_feedback: {
         type: jsPsych.plugins.parameterType.BOOL,
-        pretty_name: 'Final core feedback',
+        pretty_name: 'Final score feedback',
         default: true,
         description: 'Presence or not of the score feedback at the end of the trial.'
       },
@@ -158,7 +158,7 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
 
     var html = '<div id="jspsych-html-button-response-stimulus">'+trial.stimulus+'</div>';
 
-    html += '<div id="sketch"><canvas id="paint" width="800" height="500" style="border:1px solid #000000;"></canvas> </div>' +
+    html += '<div id="sketch"><canvas id="paint" width="500" height="500" style="border:1px solid #000000;"></canvas> </div>' +
                 '<div id="status"></div>';
 
     // helper to show buttons : hide
@@ -343,6 +343,7 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
     		ctx.fill();
     		//transparence du rond vert
     	  ctx.globalAlpha=0.9;
+        //instructions de départ : cliques sur le rond vert
     	  document.getElementById("status").innerHTML = trial.start_instructions + "<p class = 'custom-font'>&nbsp;</p><p class = 'custom-44px'>&nbsp;</p>";
     	};
 
@@ -505,12 +506,18 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
 
     	}, false);
 
-      // click on "enter" when they want to finish the trial
-      canvas.addEventListener("click", function(event) {
+      // click when they want to finish the trial
+
+      canvas.addEventListener("click", function (evt) {
         if (drawing) {
          drawing = false;
          finished = true;
          show_continue_button();
+         var mousePos = getMousePos(canvas, evt);
+         alert(mousePos.x + ',' + mousePos.y);
+         var end_x = mousePos.x;
+         var end_y = mousePos.y;
+
          //display "you have finished the task"
           if(final_score_feedback == true) {
            document.getElementById("status").innerHTML = trial.end_instructions + `<p class = "custom-font">Voici ton score : ` + Math.round(score) + ` points.</p><p class = "continue-instructions">Clique sur la flèche pour continuer</p>`;
@@ -518,7 +525,25 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
             document.getElementById("status").innerHTML = trial.end_instructions + `<p class = "custom-font">&nbsp;</p><p class = "continue-instructions">Clique sur la flèche pour continuer</p>`;
           }
        }
-     });
+
+
+      }, false);
+
+
+//old version working
+      // canvas.addEventListener("click", function(e) {
+      //   if (drawing) {
+      //    drawing = false;
+      //    finished = true;
+      //    show_continue_button();
+      //    //display "you have finished the task"
+      //     if(final_score_feedback == true) {
+      //      document.getElementById("status").innerHTML = trial.end_instructions + `<p class = "custom-font">Voici ton score : ` + Math.round(score) + ` points.</p><p class = "continue-instructions">Clique sur la flèche pour continuer</p>`;
+      //     } else {
+      //       document.getElementById("status").innerHTML = trial.end_instructions + `<p class = "custom-font">&nbsp;</p><p class = "continue-instructions">Clique sur la flèche pour continuer</p>`;
+      //     }
+      //  }
+      // });
 
 
     	canvas.addEventListener('click', function(e) {
@@ -535,14 +560,14 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
     							ctx.arc(xend, yend, endRadius, 0, 2 * Math.PI, false);
     							ctx.fill();
     							ctx.globalAlpha=1;
+                  drawing = true;
+      						finished = false;
+      						startTime = new Date();
+      						ctx.beginPath();
 
-    						drawing = true;
-    						finished = false;
-    						startTime = new Date();
-    						ctx.beginPath();
-                if (trial.cursor_display == false) {
-                  canvas.style.cursor = 'none';
-                }
+                  if (trial.cursor_display == false) {
+                    canvas.style.cursor = 'none';
+                  }
     						document.getElementById("status").innerHTML = trial.draw_instructions + "<p class = 'custom-font'>&nbsp;</p><p class = 'custom-44px'>&nbsp;</p>";
     							ctx.moveTo(mouse.x, mouse.y);
     					}
@@ -585,6 +610,13 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
 
     }
 
+    function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        };
+    }
 
     line_tracing();
 
@@ -643,6 +675,10 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
         distance_total: distance_total,
         distance_inline: distance_inline,
         distance_offline: distance_offline,
+        mousePos: mousePos,
+        //end_x: end_x,
+        //end_y: end_y,
+        //mousePos_x : mousePos.x,
       };
 
       // clear the display

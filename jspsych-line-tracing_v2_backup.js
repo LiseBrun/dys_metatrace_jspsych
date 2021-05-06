@@ -514,9 +514,9 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
          finished = true;
          show_continue_button();
          var mousePos = getMousePos(canvas, evt);
-         // alert(mousePos.x + ',' + mousePos.y);
-         end_x = mousePos.x;
-         end_y = mousePos.y;
+         alert(mousePos.x + ',' + mousePos.y);
+         var end_x = mousePos.x;
+         var end_y = mousePos.y;
 
          //display "you have finished the task"
           if(final_score_feedback == true) {
@@ -618,38 +618,6 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
         };
     }
 
-
-    function saveCanvas() {
-
-    	// Get the canvas screenshot as PNG
-    	var screenshot = Canvas2Image.saveAsPNG(canvas, true);
-
-    	// This is a little trick to get the SRC attribute from the generated <img> screenshot
-    	canvas.parentNode.appendChild(screenshot);
-    	screenshot.id = "canvasimage";
-    	data =  screenshot.src;
-    	canvas.parentNode.removeChild(screenshot);
-
-
-    	// Send the screenshot to PHP to save it on the server
-    	var url = saveScript;
-
-        jQuery.ajax({
-
-        type: "POST",
-        url: url,
-        dataType: 'text',
-          data: {
-      		score : score,
-      		distance_inline : distance_inline,
-      		distance_offline : distance_offline,
-      		timeDiff : timeDiff,
-      		crossings : crossings,
-      		base64data : data
-    	    }
-    	});
-    }
-
     line_tracing();
 
 
@@ -708,8 +676,8 @@ jsPsych.plugins["jspsych-line-tracing"] = (function() {
         distance_inline: distance_inline,
         distance_offline: distance_offline,
         //mousePos: mousePos,
-        end_x: end_x,
-        end_y: end_y,
+        // end_x: end_x,
+        // end_y: end_y,
         //mousePos_x : mousePos.x,
       };
 
